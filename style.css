@@ -1,0 +1,220 @@
+* {
+  box-sizing: border-box;
+}
+
+#dialogue-box {
+  position: fixed;
+  z-index: 2;
+  left: 2vw;
+  right: 2vw;
+  bottom: 2vh;
+  min-height: 110px;
+  padding: 20px 24px;
+  border: 8px solid #7357a5;
+  background: #fff9e9;
+  color: #302942;
+  font-family: Arial, sans-serif;
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: pre-line;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+#game-canvas {
+  position: fixed;
+  inset: 0;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  image-rendering: pixelated;
+  z-index: 0;
+}
+
+#dialogue-box {
+  z-index: 2;
+}
+#choices {
+  position: fixed;
+  z-index: 2;
+  left: 50%;
+  bottom: calc(2vh + 170px);
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+}
+
+#choices:empty {
+  display: none;
+}
+
+#choices button {
+  padding: 14px 18px;
+  border: 4px solid #7357a5;
+  background: #fff9e9;
+  color: #302942;
+  font: bold clamp(16px, 1.5vw, 22px) Arial, sans-serif;
+  cursor: pointer;
+}
+
+#choices button:hover {
+  background: #f4dce9;
+}
+
+#dialogue-box.letter {
+  z-index: 3;
+  top: 8vh;
+  right: 12vw;
+  bottom: 12vh;
+  left: 12vw;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(28px, 5vw, 56px);
+  border: 12px solid #9a7bb8;
+  background: #fff9e9;
+  background-image: radial-gradient(circle, #e4d8f2 1px, transparent 1.5px);
+  background-size: 28px 28px;
+  box-shadow: 0 18px 60px #30294255;
+  color: #302942;
+  font-family: Georgia, serif;
+  font-size: clamp(17px, 1.7vw, 23px);
+  font-weight: 400;
+  line-height: 1.75;
+  text-align: left;
+}
+
+#dialogue-box.letter::before {
+  display: block;
+  margin-bottom: 24px;
+  padding-bottom: 14px;
+  border-bottom: 2px dashed #cbb9ed;
+  color: #7357a5;
+  content: "A birthday letter for Niel";
+  font: bold clamp(22px, 2.5vw, 32px) Arial, sans-serif;
+}
+
+#dialogue-box.letter::after {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  color: #b99cda;
+  content: "✦  ♥  ✦";
+  font: bold 20px Arial, sans-serif;
+}
+
+#choices.ending {
+  z-index: 4;
+  bottom: 2vh;
+}
+
+@media (max-width: 600px) {
+  #choices {
+    left: 5vw;
+    right: 5vw;
+    transform: none;
+    display: grid;
+  }
+}
+
+#dialogue-box:not(.letter) {
+  border-radius: 18px;
+  box-shadow: 0 10px 25px #30294222;
+}
+
+#choices button {
+  min-height: 54px;
+  border-radius: 12px;
+  box-shadow: 0 4px 0 #59438e;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#choices button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #59438e;
+}
+
+#choices button:focus-visible {
+  outline: 4px solid #ffc857;
+  outline-offset: 3px;
+}
+
+/* Friendly clue and choice layout */
+#dialogue-box:not(.letter) {
+  min-height: 0;
+  max-height: 22vh;
+  overflow-y: auto;
+  padding: 16px 22px 18px;
+  border: 5px solid #7957a8;
+  border-radius: 18px;
+  background: #f5efff;
+  box-shadow: 0 8px 0 #7957a833, 0 12px 28px #30294222;
+  font-size: clamp(17px, 2vw, 27px);
+}
+
+#dialogue-box:not(.letter)::before {
+  display: block;
+  margin-bottom: 5px;
+  color: #7957a8;
+  content: "✦  NIEL’S BIRTHDAY MYSTERY  ✦";
+  font: 700 clamp(10px, 1vw, 13px) Arial, sans-serif;
+  letter-spacing: 0.09em;
+}
+
+#choices:not(.ending) {
+  width: min(760px, 92vw);
+  bottom: calc(2vh + clamp(112px, 19vh, 176px));
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#choices button {
+  min-width: 150px;
+  min-height: 52px;
+  padding: 11px 18px;
+  border: 3px solid #7957a8;
+  border-radius: 16px;
+  background: #f5efff;
+  box-shadow: 0 4px 0 #59438e, 0 5px 12px #3029421c;
+  color: #302942;
+  font-size: clamp(15px, 1.35vw, 20px);
+}
+
+#choices button:hover {
+  border-color: #ff789d;
+  background: #fff0f5;
+}
+
+@media (max-width: 600px) {
+  #dialogue-box:not(.letter) {
+    left: 3vw;
+    right: 3vw;
+    bottom: 2vh;
+    padding: 12px 15px;
+    border-width: 4px;
+    font-size: 17px;
+  }
+
+  #choices:not(.ending) {
+    left: 4vw;
+    right: 4vw;
+    bottom: calc(2vh + 120px);
+    width: auto;
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  #choices button {
+    min-width: 0;
+    min-height: 48px;
+    padding: 9px 10px;
+  }
+}
